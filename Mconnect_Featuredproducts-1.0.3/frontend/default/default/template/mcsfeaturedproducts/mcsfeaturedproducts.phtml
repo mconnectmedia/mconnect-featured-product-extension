@@ -1,0 +1,178 @@
+<?php
+/**
+ * M-Connect Solutions.
+ *
+ * NOTICE OF LICENSE
+ *
+
+ *
+ * @category   Catalog
+ * @package   Mconnect_Featuredproducts
+ * @author      M-Connect Solutions (http://www.magentoconnect.us)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+$storeId = Mage::app()->getStore()->getId();
+$_enabledBestSellers = $this->getmcsfeaturedenabled($storeId);
+if($_enabledBestSellers){?>
+<div>
+<?php
+$_configData = $this->getmcsfeaturedconfig($storeId);
+if($_configData['dispCntFeatured'] == ''){
+$_configData['dispCntFeatured'] = 0;
+}
+
+$_featuredprod_displayPrice = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispprice', $storeId);
+$_featuredprod_displayAd2Cart = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispad2cartbtn', $storeId);
+$_featuredprod_displayAd2Wishlist = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispad2wishlist', $storeId);
+$_featuredprod_displayAd2Compare = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispad2compare', $storeId);
+
+$_rootcatID = Mage::app()->getStore()->getRootCategoryId();
+$visibility = array(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH, Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG);
+
+?>
+<!-- FEATURED -->
+<?php
+if($_configData['dispTitleFlagFeatured']){?>
+<h4 style="clear:both;"><?php echo $_configData['dispTitleFeatured']; ?></h4>
+<?php
+}
+$_Featured_pID = array();
+$_productCollection = Mage::getModel('featuredproducts/featuredproducts')->getCollection()
+		->addFieldToFilter('featuredstatus', 1);
+
+foreach($_productCollection as $_prod){
+$_Featured_pID[] = intval($_prod->getProductId());
+}
+
+switch($_configData['dispModeFeatured']){
+	case 'asc':
+	asort($_Featured_pID);
+	break;
+
+	case 'desc':
+	arsort($_Featured_pID);
+	break;
+
+	case 'random':
+	shuffle($_Featured_pID);
+	break;
+
+	default:
+	shuffle($_Featured_pID);
+}
+
+$_Featured_pID_cnt = count($_Featured_pID);
+if($_Featured_pID && $_Featured_pID_cnt > 0){
+
+$c = 0;
+$_outerCnt = 1;
+if($_configData['columnCount'] == '' || $_configData['columnCount'] == 'NULL'){
+$_configData['columnCount'] = 3;
+}
+$_ColWidth = (158*$_configData['columnCount']);
+
+$_tmpDiscard_IDs = array();
+foreach($_Featured_pID as $key => $_pID){
+$_productColl = Mage::getModel('catalog/product')->getCollection()
+		->addAttributeToSelect('*')
+		->addAttributeToFilter('entity_id', $_pID)
+		->addAttributeToFilter('status', 1)
+		->addAttributeToFilter('visibility', $visibility);
+
+if(!$_productColl || $_productColl->count() == 0){
+$_tmpDiscard_IDs[] = $key;
+} else {
+foreach($_productColl as $_productHandler):
+if(!$_productHandler):
+$_tmpDiscard_IDs[] = $key;
+endif;
+endforeach;
+}
+
+}
+
+foreach($_tmpDiscard_IDs as $k){
+unset($_Featured_pID[$k]);
+}
+
+$_Featured_pID_cnt = count($_Featured_pID);
+foreach($_Featured_pID as $_pID){
+$_productColl = Mage::getModel('catalog/product')->getCollection()
+		->addAttributeToSelect('*')
+		->addAttributeToFilter('entity_id', $_pID);
+
+if($_productColl->count() == 1):
+foreach($_productColl as $_productHandler):
+
+if($c == 0 || $c%$_configData['columnCount'] == 0){?>
+<div class="products-grid <?php echo $c; ?>" style="width:<?php echo $_ColWidth; ?>px;margin:0;">
+<?php
+}?>
+
+<div style="float:left;width:138px;padding:12px 10px;">
+<a href="<?php echo $_productHandler->getProductUrl(); ?>" class="product-image" title="<?php echo $_productHandler->getName(); ?>">
+<img src="<?php echo $this->helper('catalog/image')->init($_productHandler, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_productHandler, 'small_image'), null, true) ?>" />
+</a>
+<h2 class="product-name"><a href="<?php echo $_productHandler->getProductUrl(); ?>"><?php echo $_productHandler->getName(); ?></a></h2>
+<?php if($_productHandler->isSaleable()): ?>
+<?php if($_featuredprod_displayPrice){?>
+<div class="price-box">
+<span id="product-price-<?php echo $_productHandler->getId(); ?>" class="regular-price">
+<span class="price"><?php echo Mage::helper('core')->currency($_productHandler->getPrice()); ?></span>
+</span>
+</div>
+<?php }
+if($_featuredprod_displayAd2Cart){?>
+<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo Mage::getUrl('checkout/cart/add/product/'.$_productHandler->getId().'/', array('_secure'=>true)); ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+<?php
+}?>
+<?php else: ?>
+<p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+<?php endif; ?>
+
+<div class="add-to-links">
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+<?php if($_featuredprod_displayAd2Wishlist){?>
+<div><a href="<?php echo $this->helper('wishlist')->getAddUrl($_productHandler) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></div>
+<?php
+}?>
+<?php endif; ?>
+
+<?php if($_featuredprod_displayAd2Compare){?>
+<div><span class="separator">|</span> <a href="<?php echo Mage::getUrl('catalog/product_compare/add/product/'.$_productHandler->getId().'/', array('_secure'=>true)); ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></div>
+<?php
+}?>
+</div>
+
+</div>
+<?php
+$c++;
+if (($c%$_configData['columnCount']) == 0 || $c == $_configData['dispCntFeatured'] || $_outerCnt == $_Featured_pID_cnt){?>
+</div>
+<?php
+}
+
+
+
+
+if($_configData['dispCntFeatured'] != '' && $_configData['dispCntFeatured'] > 0) {
+if($c >= $_configData['dispCntFeatured']){ break 2; }
+}
+
+endforeach;
+endif;
+
+$_outerCnt++;
+
+} // ends foreach
+
+unset($_Featured_pID);
+unset($_tmpDiscard_IDs);
+
+} else {?>
+<h3>sorry, No records.!</h3>
+<?php } // ends if-else ?>
+</div>
+<?php
+} // ends if ?>

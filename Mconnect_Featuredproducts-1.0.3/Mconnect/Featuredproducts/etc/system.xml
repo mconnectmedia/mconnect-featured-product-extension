@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @category   Catalog
+ * @package   Mconnect_Featuredproducts
+ * @author      M-Connect Solutions (http://www.magentoconnect.us)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <mconnect_featuredproducts>
+            <label>Mconnect</label>
+            <sort_order>196</sort_order>
+        </mconnect_featuredproducts>
+    </tabs>
+    <sections>
+          <featuredproducts translate="label">
+            <label>Featured Products</label>
+            <tab>mconnect_featuredproducts</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>800</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+		  <featuredproductsdisplay translate="label">
+                    <label>Display Settings</label>
+                    <sort_order>604</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                        
+			<enabledfeatured translate="lable">
+                            <label>Enabled</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabledfeatured>
+                        <featureddisporder translate="lable">
+                            <label>Mode</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>featuredproducts/source_mode</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddisporder>
+                        <featureddispcnt>
+                            <label>Products Count</label>                            
+                            <comment><![CDATA[Blank/Zero value leads to the display of all records. and mentioned value deals with the max. no of products to be displayed.]]></comment> 
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddispcnt>
+                        <featureddisptitletxt>
+                            <label>Title</label>                            
+                            <comment><![CDATA[]]></comment> 
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddisptitletxt>
+                        <featureddisptitle>
+                            <label>Display Title</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddisptitle>
+                        <featureddispcolcnt>
+                            <label>Column Count</label>                            
+                            <comment><![CDATA[]]></comment> 
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddispcolcnt>
+                        <featureddispprice>
+                            <label>Show Price</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddispprice>
+                        <featureddispad2cartbtn>
+                            <label>Show 'Add To Cart'</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddispad2cartbtn>
+                        <featureddispad2wishlist>
+                            <label>Show 'Add To Wishlist'</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddispad2wishlist>
+                        <featureddispad2compare>
+                            <label>Show 'Add To Compare'</label>                            
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </featureddispad2compare>
+		  </fields>
+		  </featuredproductsdisplay>		                                                                                     
+            </groups>
+        </featuredproducts>
+    </sections>
+</config>

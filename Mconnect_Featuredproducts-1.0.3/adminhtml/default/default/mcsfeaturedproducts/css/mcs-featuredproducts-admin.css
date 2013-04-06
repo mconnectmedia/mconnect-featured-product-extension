@@ -1,0 +1,4 @@
+div#featuredproducts_tabs_form_section_content div#productGrid div#productGrid_massaction table.massaction div.right form#productGrid_massaction-form{display:none;}
+div#featuredproducts_tabs_form_section_content div#productGrid div.grid table#productGrid_table tbody tr td.last{display:none;}
+div#featuredproducts_tabs_form_section_content div#productGrid div.grid table#productGrid_table thead tr th.last{display:none;}
+div#featuredproducts_tabs_form_section_content div#productGrid table.actions td.pager a.link-feed{display:none;}

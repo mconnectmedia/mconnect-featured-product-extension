@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Catalog
+ * @package   Mconnect_Featuredproducts
+ * @author      M-Connect Solutions (http://www.magentoconnect.us)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout version="0.1.0">
+    <featuredproducts_adminhtml_featuredproducts_index>
+    <reference name="head">
+        <action method="addCss"><stylesheet>mcsfeaturedproducts/css/mcs-featuredproducts-admin.css</stylesheet></action>
+        <action method="addItem"><type>skin_js</type><name>mcsfeaturedproducts/js/jquery-1.8.2.min.js</name><!--<params/><if>lt IE 8</if>--></action>
+        <action method="addItem"><type>skin_js</type><name>mcsfeaturedproducts/js/mcs-featuredproducts-adminfunctions.js</name><!--<params/><if>lt IE 8</if>--></action>
+    </reference>
+	<reference name="content">
+        <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" before="edit_form">
+            <action method="setUseConfirm"><params>0</params></action>
+        </block>
+            <block type="featuredproducts/adminhtml_featuredproducts" name="featuredproducts" />
+        </reference>
+    </featuredproducts_adminhtml_featuredproducts_index>
+
+  <featuredproducts_adminhtml_featuredproducts_new>
+    <reference name="head">
+        <action method="addCss"><stylesheet>mcsfeaturedproducts/css/mcs-featuredproducts-admin.css</stylesheet></action>
+        <action method="addItem"><type>skin_js</type><name>mcsfeaturedproducts/js/jquery-1.8.2.min.js</name><!--<params/><if>lt IE 8</if>--></action>
+        <action method="addItem"><type>skin_js</type><name>mcsfeaturedproducts/js/mcs-featuredproducts-adminfunctions.js</name><!--<params/><if>lt IE 8</if>--></action>
+    </reference>
+	<reference name="content">
+        <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" before="edit_form">
+            <action method="setUseConfirm"><params>0</params></action>
+        </block>
+    </reference>
+  </featuredproducts_adminhtml_featuredproducts_new>
+  <featuredproducts_adminhtml_featuredproducts_edit>
+    <reference name="head">
+        <action method="addCss"><stylesheet>mcsfeaturedproducts/css/mcs-featuredproducts-admin.css</stylesheet></action>
+        <action method="addItem"><type>skin_js</type><name>mcsfeaturedproducts/js/jquery-1.8.2.min.js</name><!--<params/><if>lt IE 8</if>--></action>
+        <action method="addItem"><type>skin_js</type><name>mcsfeaturedproducts/js/mcs-featuredproducts-adminfunctions.js</name><!--<params/><if>lt IE 8</if>--></action>
+    </reference>
+	<reference name="content">
+        <block type="adminhtml/store_switcher" name="store_switcher" as="store_switcher" before="edit_form">
+            <action method="setUseConfirm"><params>0</params></action>
+        </block>
+    </reference>
+  </featuredproducts_adminhtml_featuredproducts_edit>
+
+</layout>

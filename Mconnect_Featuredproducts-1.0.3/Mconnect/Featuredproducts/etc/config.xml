@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   Catalog
+ * @package   Mconnect_Featuredproducts
+ * @author      M-Connect Solutions (http://www.magentoconnect.us)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Mconnect_Featuredproducts>
+            <version>0.1.0</version>
+        </Mconnect_Featuredproducts>
+    </modules>
+    <frontend>
+        <routers>
+            <featuredproducts>
+                <use>standard</use>
+                <args>
+                    <module>Mconnect_Featuredproducts</module>
+                    <frontName>featuredproducts</frontName>
+                </args>
+            </featuredproducts>
+        </routers>
+        <layout>
+            <updates>
+                <featuredproducts>
+                    <file>mcsfeaturedproducts.xml</file>
+                </featuredproducts>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<featuredproducts>
+				<use>admin</use>
+				<args>
+					<module>Mconnect_Featuredproducts</module>
+					<frontName>featuredproducts</frontName>
+				</args>
+			</featuredproducts>
+        </routers>
+    </admin>
+    <adminhtml>
+	<menu>
+
+	<catalog module="catalog">				               
+	<children>					
+            <featuredproducts translate="title" module="featuredproducts">
+		<title>Featured Products</title>
+		<children>
+		<manageproducts translate="title" module="featuredproducts">
+		<title>Manage Products</title>
+		<sort_order>0</sort_order>
+		<action>featuredproducts/adminhtml_featuredproducts</action>
+		</manageproducts>
+		<settings translate="title" module="featuredproducts">
+		<title>Settings</title>
+		<sort_order>1</sort_order>
+		<action>adminhtml/system_config/edit/section/featuredproducts</action>
+		</settings>
+		</children>
+		<sort_order>1000</sort_order>
+    	    </featuredproducts>                    
+	</children>
+	</catalog>
+
+	</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Mconnect_Featuredproducts>
+							<title>Featuredproducts Module</title>
+							<sort_order>10</sort_order>
+						</Mconnect_Featuredproducts>
+		<system>
+                         <children>
+                            <config>
+                                <children>
+                                    <featuredproducts translate="title" module="featuredproducts"> 
+                                        <title>royaltheme - All</title>
+                                    </featuredproducts>
+                                </children>
+                            </config>
+                         </children>
+		</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<featuredproducts>
+					<file>mcsfeaturedproducts.xml</file>
+				</featuredproducts>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <featuredproducts>
+                <class>Mconnect_Featuredproducts_Model</class>
+                <resourceModel>featuredproducts_mysql4</resourceModel>
+            </featuredproducts>
+            <featuredproducts_mysql4>
+                <class>Mconnect_Featuredproducts_Model_Mysql4</class>
+                <entities>
+                    <featuredproducts>
+                        <table>mcsfeaturedproducts</table>
+                    </featuredproducts>
+                </entities>
+            </featuredproducts_mysql4>
+        </models>
+        <resources>
+            <featuredproducts_setup>
+                <setup>
+                    <module>Mconnect_Featuredproducts</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </featuredproducts_setup>
+            <featuredproducts_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </featuredproducts_write>
+            <featuredproducts_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </featuredproducts_read>
+        </resources>
+        <blocks>
+            <featuredproducts>
+                <class>Mconnect_Featuredproducts_Block</class>
+            </featuredproducts>
+        </blocks>
+        <helpers>
+            <featuredproducts>
+                <class>Mconnect_Featuredproducts_Helper</class>
+            </featuredproducts>
+        </helpers>
+    </global>
+</config>
