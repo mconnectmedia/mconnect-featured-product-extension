@@ -22,6 +22,7 @@ if($_configData['dispCntFeatured'] == ''){
 $_configData['dispCntFeatured'] = 0;
 }
 
+$_mage_product_block = new Mage_Catalog_Block_Product;
 $_featuredprod_displayPrice = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispprice', $storeId);
 $_featuredprod_displayAd2Cart = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispad2cartbtn', $storeId);
 $_featuredprod_displayAd2Wishlist = Mage::getStoreConfig('featuredproducts/featuredproductsdisplay/featureddispad2wishlist', $storeId);
@@ -117,11 +118,7 @@ if($c == 0 || $c%$_configData['columnCount'] == 0){?>
 <h2 class="product-name"><a href="<?php echo $_productHandler->getProductUrl(); ?>"><?php echo $_productHandler->getName(); ?></a></h2>
 <?php if($_productHandler->isSaleable()): ?>
 <?php if($_featuredprod_displayPrice){?>
-<div class="price-box">
-<span id="product-price-<?php echo $_productHandler->getId(); ?>" class="regular-price">
-<span class="price"><?php echo Mage::helper('core')->currency($_productHandler->getPrice()); ?></span>
-</span>
-</div>
+<?php echo $_mage_product_block->getPriceHtml($_productHandler) ?>
 <?php }
 if($_featuredprod_displayAd2Cart){?>
 <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo Mage::getUrl('checkout/cart/add/product/'.$_productHandler->getId().'/', array('_secure'=>true)); ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
